@@ -16,7 +16,6 @@ namespace Calculator {
         // Чисто-виртуальная функция. Оставляет определение классам-наследникам
         virtual void execute(const std::list<std::string> &executionArguments, ExecutionContext &executionCalculatorContext) = 0;
 
-        // Обязательное требование к С++ интерфейсам
         virtual ~ICalculatorOperation() = default;
     };
 

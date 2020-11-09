@@ -5,6 +5,9 @@
 #include "Division.h"
 #include "../Exceptions/CalculatorExecutesException.h"
 #include "../Exceptions/RuntimeCalculatorException.h"
+#include "../OperationCreator.h"
+
+REGISTER_CREATOR(Calculator::Division, "/")
 
 void Calculator::Division::execute(const std::list<std::string> &executionArguments,
                                    Calculator::ExecutionContext &executionCalculatorContext) {
@@ -17,8 +20,8 @@ void Calculator::Division::execute(const std::list<std::string> &executionArgume
     }
 
     if (y == 0) {
-        executionCalculatorContext.pushCalculatorStack(x);
         executionCalculatorContext.pushCalculatorStack(y);
+        executionCalculatorContext.pushCalculatorStack(x);
         throw Calculator::CalculatorExecutesException("Couldn't divide by zero!");
     }
     executionCalculatorContext.pushCalculatorStack(x / y);

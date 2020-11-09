@@ -4,6 +4,9 @@
 
 #include "Subtraction.h"
 #include "../Exceptions/RuntimeCalculatorException.h"
+#include "../OperationCreator.h"
+
+REGISTER_CREATOR(Calculator::Subtraction, "-")
 
 void Calculator::Subtraction::execute(const std::list<std::string> &executionArguments,
                                       Calculator::ExecutionContext &executionCalculatorContext) {

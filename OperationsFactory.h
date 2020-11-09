@@ -8,30 +8,40 @@
 #include <string>
 
 #include "IOperationsCreator.h"
-#include "OperationCreator.h"
 #include "Exceptions/RuntimeCalculatorException.h"
 #include "Exceptions/CalculatorException.h"
 
 namespace Calculator {
 
     class OperationsFactory {
+    private:
+
+        OperationsFactory() = default;
+
     protected:
-        std::map<std::string, Calculator::IOperationsCreator *> operationsMap_;
+
+        std::map<std::string, Calculator::IOperationsCreator *> operationsCreatorsMap;
 
     public:
 
-        template<class T>
-        void registerOperationCreator(const std::string &operationID) {
-            if (operationsMap_.find(operationID) == operationsMap_.end()) {
-                operationsMap_[operationID] = new Calculator::OperationCreator<T>();
+        OperationsFactory(const OperationsFactory &) = delete;
+
+        static OperationsFactory &instance() {
+            static OperationsFactory factory;
+            return factory;
+        }
+
+        void registerOperationCreator(const std::string &operationID, Calculator::IOperationsCreator *operationsCreator) {
+            if (operationsCreatorsMap.find(operationID) == operationsCreatorsMap.end()) {
+                operationsCreatorsMap[operationID] = operationsCreator;
             } else {
                 throw Calculator::RuntimeCalculatorException("OPERATION FACTORY: too much creators for given key");
             }
         }
 
         Calculator::ICalculatorOperation *create(const std::string &operationID) {
-            auto it = operationsMap_.find(operationID);
-            if (it != operationsMap_.end()) {
+            auto it = operationsCreatorsMap.find(operationID);
+            if (it != operationsCreatorsMap.end()) {
                 return it->second->create();
             } else {
                 throw Calculator::CalculatorException("OPERATION FACTORY: unknown command");

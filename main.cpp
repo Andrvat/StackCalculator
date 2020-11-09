@@ -20,13 +20,16 @@ int main(int argc, char *argv[]) {
         case DataEntryArguments::FileInput:
             fileStream.open(argv[1]);
             if (!fileStream.is_open()) {
-                std::cout << "Couldn't open file by filename from console argument. Please, check it and try again..." << std::endl;
+                std::cout
+                        << "Couldn't open file by filename from console argument. Please, check it and try again..."
+                        << std::endl;
                 break;
             }
             calculator.run(fileStream);
             break;
         case DataEntryArguments::IncorrectArguments:
-            std::cout << "Wrong number of console program arguments! Please, check it and try again..." << std::endl;
+            std::cout << "Wrong number of console program arguments! Please, check it and try again..."
+                      << std::endl;
             break;
     }
     return 0;

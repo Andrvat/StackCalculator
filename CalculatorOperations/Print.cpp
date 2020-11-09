@@ -4,6 +4,9 @@
 
 #include "Print.h"
 #include "../Exceptions/RuntimeCalculatorException.h"
+#include "../OperationCreator.h"
+
+REGISTER_CREATOR(Calculator::Print, "PRINT")
 
 #include <iostream>
 

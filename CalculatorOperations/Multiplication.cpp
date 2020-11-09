@@ -4,8 +4,10 @@
 
 #include "Multiplication.h"
 #include "../Exceptions/CalculatorException.h"
-#include "../Exceptions/CalculatorExecutesException.h"
 #include "../Exceptions/RuntimeCalculatorException.h"
+#include "../OperationCreator.h"
+
+REGISTER_CREATOR(Calculator::Multiplication, "*")
 
 void Calculator::Multiplication::execute(const std::list<std::string> &executionArguments,
                                          Calculator::ExecutionContext &executionCalculatorContext) {

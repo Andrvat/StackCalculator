@@ -7,29 +7,12 @@
 #include "Exceptions/RuntimeCalculatorException.h"
 #include "Exceptions/CalculatorExecutesException.h"
 #include "OperationsFactory.h"
-#include "CalculatorOperations/Paths.h"
-
 
 #include <iostream>
 #include <string>
 #include <sstream>
 
 void Calculator::CalculatorApplication::run(std::istream &inputStream) {
-
-    // Give knowledge about all available operations to operation factory
-    static Calculator::OperationsFactory factory;
-    factory.registerOperationCreator<Calculator::Addition>("+");
-    factory.registerOperationCreator<Calculator::Comments>("#");
-    factory.registerOperationCreator<Calculator::Define>("DEFINE");
-    factory.registerOperationCreator<Calculator::Division>("/");
-    factory.registerOperationCreator<Calculator::Multiplication>("*");
-    factory.registerOperationCreator<Calculator::Pop>("POP");
-    factory.registerOperationCreator<Calculator::Print>("PRINT");
-    factory.registerOperationCreator<Calculator::Push>("PUSH");
-    factory.registerOperationCreator<Calculator::Sqrt>("SQRT");
-    factory.registerOperationCreator<Calculator::Subtraction>("-");
-    factory.registerOperationCreator<Calculator::Pow>("^");
-    factory.registerOperationCreator<Calculator::Abs>("ABS");
 
     std::string currentInputLine;
     while(getline(inputStream, currentInputLine)) {
@@ -50,7 +33,7 @@ void Calculator::CalculatorApplication::run(std::istream &inputStream) {
         }
 
         try {
-            Calculator::ICalculatorOperation *currentOperation = factory.create(operationName);
+            Calculator::ICalculatorOperation *currentOperation = Calculator::OperationsFactory::instance().create(operationName);
             currentOperation->execute(argumentsList, this->executionCalculatorContext);
         } catch (const Calculator::CalculatorException &exception) {
             std::cout << exception.what() << std::endl;

@@ -4,6 +4,9 @@
 
 #include "Define.h"
 #include "../Exceptions/CalculatorExecutesException.h"
+#include "../OperationCreator.h"
+
+REGISTER_CREATOR(Calculator::Define, "DEFINE")
 
 #include <string>
 

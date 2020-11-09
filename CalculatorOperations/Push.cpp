@@ -4,6 +4,9 @@
 
 #include "Push.h"
 #include "../Exceptions/CalculatorExecutesException.h"
+#include "../OperationCreator.h"
+
+REGISTER_CREATOR(Calculator::Push, "PUSH");
 
 void Calculator::Push::execute(const std::list<std::string> &executionArguments,
                                Calculator::ExecutionContext &executionCalculatorContext) {
