@@ -29,7 +29,7 @@ namespace Calculator {
 
         double getVariableByName(std::string &varName) const;
 
-
+        [[nodiscard]] size_t getCalculatorStackSize() const;
 
     };
 

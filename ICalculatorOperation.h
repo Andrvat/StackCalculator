@@ -3,6 +3,7 @@
 //
 
 #pragma once
+
 #include <list>
 #include <string>
 
@@ -13,8 +14,9 @@ namespace Calculator {
     class ICalculatorOperation {
 
     public:
-        // Чисто-виртуальная функция. Оставляет определение классам-наследникам
-        virtual void execute(const std::list<std::string> &executionArguments, ExecutionContext &executionCalculatorContext) = 0;
+
+        virtual void
+        execute(const std::list<std::string> &executionArguments, ExecutionContext &executionCalculatorContext) = 0;
 
         virtual ~ICalculatorOperation() = default;
     };

@@ -12,13 +12,6 @@ REGISTER_CREATOR(Calculator::Print, "PRINT")
 
 void Calculator::Print::execute(const std::list<std::string> &executionArguments,
                                    Calculator::ExecutionContext &executionCalculatorContext) {
-    double x;
-    try {
-        x = executionCalculatorContext.topCalculatorStack();
-    } catch (Calculator::RuntimeCalculatorException &exception) {
-        throw Calculator::RuntimeCalculatorException(exception.getErrorMessage());
-    }
-
-    std::cout << x << std::endl;
+    std::cout << executionCalculatorContext.topCalculatorStack() << std::endl;
 
 }

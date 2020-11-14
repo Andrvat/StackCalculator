@@ -37,3 +37,7 @@ double Calculator::ExecutionContext::getVariableByName(std::string &varName) con
     }
     return calculatorVariables_.at(varName);
 }
+
+size_t Calculator::ExecutionContext::getCalculatorStackSize() const {
+    return calculatorStack_.size();
+}

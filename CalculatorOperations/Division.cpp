@@ -11,13 +11,12 @@ REGISTER_CREATOR(Calculator::Division, "/")
 
 void Calculator::Division::execute(const std::list<std::string> &executionArguments,
                                    Calculator::ExecutionContext &executionCalculatorContext) {
-    double x, y;
-    try {
-        x = executionCalculatorContext.popCalculatorStack();
-        y = executionCalculatorContext.popCalculatorStack();
-    } catch (Calculator::RuntimeCalculatorException &exception) {
-        throw Calculator::RuntimeCalculatorException(exception.getErrorMessage());
+    if (executionCalculatorContext.getCalculatorStackSize() < 2) {
+        throw Calculator::RuntimeCalculatorException("EXECUTION CONTEXT: stack is underflow");
     }
+    double x, y;
+    x = executionCalculatorContext.popCalculatorStack();
+    y = executionCalculatorContext.popCalculatorStack();
 
     if (y == 0) {
         executionCalculatorContext.pushCalculatorStack(y);

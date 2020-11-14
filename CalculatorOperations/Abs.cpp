@@ -10,13 +10,6 @@ REGISTER_CREATOR(Calculator::Abs, "ABS");
 
 void Calculator::Abs::execute(const std::list<std::string> &executionArguments,
                               Calculator::ExecutionContext &executionCalculatorContext) {
-    double x;
-    try {
-        x = executionCalculatorContext.popCalculatorStack();
-    } catch (Calculator::RuntimeCalculatorException &exception) {
-        throw Calculator::RuntimeCalculatorException(exception.getErrorMessage());
-    }
-
-    executionCalculatorContext.pushCalculatorStack(std::abs(x));
+    executionCalculatorContext.pushCalculatorStack(std::abs(executionCalculatorContext.popCalculatorStack()));
 
 }

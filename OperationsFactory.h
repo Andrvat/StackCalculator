@@ -18,35 +18,20 @@ namespace Calculator {
 
         OperationsFactory() = default;
 
-    protected:
-
         std::map<std::string, Calculator::IOperationsCreator *> operationsCreatorsMap;
 
     public:
 
         OperationsFactory(const OperationsFactory &) = delete;
 
-        static OperationsFactory &instance() {
-            static OperationsFactory factory;
-            return factory;
-        }
+        OperationsFactory &operator=(const OperationsFactory &) = delete;
 
-        void registerOperationCreator(const std::string &operationID, Calculator::IOperationsCreator *operationsCreator) {
-            if (operationsCreatorsMap.find(operationID) == operationsCreatorsMap.end()) {
-                operationsCreatorsMap[operationID] = operationsCreator;
-            } else {
-                throw Calculator::RuntimeCalculatorException("OPERATION FACTORY: too much creators for given key");
-            }
-        }
+        static OperationsFactory &instance();
 
-        Calculator::ICalculatorOperation *create(const std::string &operationID) {
-            auto it = operationsCreatorsMap.find(operationID);
-            if (it != operationsCreatorsMap.end()) {
-                return it->second->create();
-            } else {
-                throw Calculator::CalculatorException("OPERATION FACTORY: unknown command");
-            }
-        }
+        void
+        registerOperationCreator(const std::string &operationID, Calculator::IOperationsCreator *operationsCreator);
+
+        Calculator::ICalculatorOperation *create(const std::string &operationID);
     };
 
 }

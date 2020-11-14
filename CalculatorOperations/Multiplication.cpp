@@ -11,13 +11,10 @@ REGISTER_CREATOR(Calculator::Multiplication, "*")
 
 void Calculator::Multiplication::execute(const std::list<std::string> &executionArguments,
                                          Calculator::ExecutionContext &executionCalculatorContext) {
-    double x, y;
-    try {
-        x = executionCalculatorContext.popCalculatorStack();
-        y = executionCalculatorContext.popCalculatorStack();
-    } catch (Calculator::RuntimeCalculatorException &exception) {
-        throw Calculator::RuntimeCalculatorException(exception.getErrorMessage());
+    if (executionCalculatorContext.getCalculatorStackSize() < 2) {
+        throw Calculator::RuntimeCalculatorException("EXECUTION CONTEXT: stack is underflow");
     }
 
-    executionCalculatorContext.pushCalculatorStack(x * y);
+    executionCalculatorContext.pushCalculatorStack(
+            executionCalculatorContext.popCalculatorStack() * executionCalculatorContext.popCalculatorStack());
 }

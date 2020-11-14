@@ -24,10 +24,6 @@ namespace Calculator {
         [[nodiscard]] const char *what() const noexcept override {
             return errorMessage_.c_str();
         }
-
-        [[nodiscard]] std::string getErrorMessage() const {
-            return errorMessage_;
-        }
     };
 }
 
