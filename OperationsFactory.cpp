@@ -11,19 +11,22 @@ Calculator::OperationsFactory &Calculator::OperationsFactory::instance() {
 
 void Calculator::OperationsFactory::registerOperationCreator(const std::string &operationID,
                                                              Calculator::IOperationsCreator *operationsCreator) {
-    if (operationsCreatorsMap.find(operationID) == operationsCreatorsMap.end()) {
-        operationsCreatorsMap[operationID] = operationsCreator;
+    if (isValueByIdExistInOperationsCreatorsMap(operationID)) {
+        throw Calculator::RuntimeCalculatorException(OPERATIONS_FACTORY_INDICATOR + " " + "too much creators for given key");
     } else {
-        throw Calculator::RuntimeCalculatorException("OPERATION FACTORY: too much creators for given key");
+        operationsCreatorsMap[operationID] = operationsCreator;
     }
 }
 
 Calculator::ICalculatorOperation *Calculator::OperationsFactory::create(const std::string &operationID) {
-    auto it = operationsCreatorsMap.find(operationID);
-    if (it != operationsCreatorsMap.end()) {
-        return it->second->create();
+    if (isValueByIdExistInOperationsCreatorsMap(operationID)) {
+        return operationsCreatorsMap.find(operationID)->second->create();
     } else {
-        throw Calculator::CalculatorException("OPERATION FACTORY: unknown command: " + operationID);
+        throw Calculator::CalculatorException(OPERATIONS_FACTORY_INDICATOR + " " + "unknown command:" + " " + operationID);
     }
+}
+
+bool Calculator::OperationsFactory::isValueByIdExistInOperationsCreatorsMap(const std::string &operationID) const {
+    return operationsCreatorsMap.find(operationID) != operationsCreatorsMap.end();
 }
 

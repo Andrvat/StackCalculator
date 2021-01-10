@@ -16,9 +16,13 @@ namespace Calculator {
     class OperationsFactory {
     private:
 
+        const std::string OPERATIONS_FACTORY_INDICATOR = "OPERATIONS FACTORY:";
+
         OperationsFactory() = default;
 
         std::map<std::string, Calculator::IOperationsCreator *> operationsCreatorsMap;
+
+        [[nodiscard]] bool isValueByIdExistInOperationsCreatorsMap(const std::string &operationID) const;
 
     public:
 

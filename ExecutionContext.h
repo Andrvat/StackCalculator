@@ -3,6 +3,7 @@
 //
 
 #pragma once
+
 #include <map>
 #include <string>
 #include <stack>
@@ -15,6 +16,7 @@ namespace Calculator {
         std::map<std::string, double> calculatorVariables_;
         std::stack<double> calculatorStack_;
 
+        const std::string EXECUTION_CONTEXT_INDICATOR = "EXECUTION CONTEXT:";
     public:
 
         void pushCalculatorStack(double num);

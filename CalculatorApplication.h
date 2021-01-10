@@ -8,11 +8,11 @@
 
 namespace Calculator {
 
-    [[maybe_unused]] const std::string STOP_CALCULATOR_COMMAND = "EXIT";
-
     class CalculatorApplication {
     private:
         ExecutionContext executionCalculatorContext;
+
+        const std::string STOP_CALCULATOR_COMMAND = "EXIT";
     public:
         void run(std::istream &inputStream);
     };

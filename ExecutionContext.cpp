@@ -22,7 +22,7 @@ double Calculator::ExecutionContext::popCalculatorStack() {
 
 double Calculator::ExecutionContext::topCalculatorStack() const {
     if (isCalculatorStackEmpty()) {
-        throw Calculator::RuntimeCalculatorException("EXECUTION CONTEXT: stack is underflow");
+        throw Calculator::RuntimeCalculatorException(EXECUTION_CONTEXT_INDICATOR + " " + "stack is underflow");
     }
     return calculatorStack_.top();
 }
@@ -33,7 +33,8 @@ void Calculator::ExecutionContext::addNewVariable(std::string &varName, double v
 
 double Calculator::ExecutionContext::getVariableByName(std::string &varName) const {
     if (calculatorVariables_.find(varName) == calculatorVariables_.end()) {
-        throw Calculator::CalculatorExecutesException("EXECUTION CONTEXT: unknown variable " + varName);
+        throw Calculator::CalculatorExecutesException(
+                EXECUTION_CONTEXT_INDICATOR + " " + "unknown variable" + " " + varName);
     }
     return calculatorVariables_.at(varName);
 }
